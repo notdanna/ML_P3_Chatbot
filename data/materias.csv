@@ -1,0 +1,4 @@
+materia_id,clave,nombre,creditos,plan,area
+MAT101,AI101,Introduccion a la Inteligencia Artificial,8,2023,Optativa
+MAT102,MATFIS01,Fundamentos de Matematicas y Fisica,10,2023,Tronco Comun
+MAT201,PRG02,Programacion II,9,2023,Obligatoria

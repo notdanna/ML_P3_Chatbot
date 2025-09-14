@@ -1,0 +1,4 @@
+grupo_id,materia_id,profesor,horario,turno,modalidad,salon,capacidad,inscritos,periodo_id,slots
+G-105,MAT101,"Lopez",LuMi 09:00-11:00,Matutino,Presencial,A-104,35,12,2025-1,LU-09;LU-10;MI-09;MI-10
+G-110,MAT101,"Mendoza",MaJu 12:00-14:00,Matutino,En linea,Zoom-12,30,27,2025-1,MA-12;MA-13;JU-12;JU-13
+G-220,MAT201,"Serrano",Sa 08:00-12:00,Mixto,Presencial,B-203,25,8,2025-1,SA-08;SA-09;SA-10;SA-11

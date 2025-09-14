@@ -1,0 +1,5 @@
+alumno_id,grupo_id,periodo_id,parcial1,parcial2,final,resultado
+A001,G-105,2025-1,8,9,9,Aprobado
+A001,G-220,2025-1,9,9,10,Aprobado
+A002,G-110,2025-1,7,8,8,Aprobado
+A003,G-105,2025-1,6,7,6,Reprobado
