@@ -1,4 +1,6 @@
 import re, unicodedata
+
+from typing import Pattern
 from utils.tablasIntencion import INTENTS, SUBINTENTS
 # ======================================================
 # Helpers de match
@@ -21,10 +23,12 @@ def findall_subintents(text: str, main_category: str):
     subs = SUBINTENTS.get(main_category, [])
     return [name for name, pattern in subs if re.search(pattern, t, flags=re.I | re.X)]
 
+
 def norm(s: str) -> str:
     s = s.strip().lower()
-    s = ''.join(c for c in unicodedata.normalize('NFD', s)
-                if unicodedata.category(c) != 'Mn')
-    s = re.sub(r'\s+', ' ', s)
+    s = ''.join(
+        c for c in unicodedata.normalize('NFD', s)
+        if unicodedata.category(c) != 'Mn'
+    )
     return s
 

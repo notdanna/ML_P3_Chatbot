@@ -1,6 +1,8 @@
 import re, unicodedata
 def handle(ctx, text):
     return "Proceso de inscripción iniciado (demo)."
+
+
 Inscripcion_RE = r"""
 (?i)\b(
     inscripcion | preinscripcion | reinscripcion | inscrib\w* | reinscrib\w* |
