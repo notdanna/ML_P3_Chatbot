@@ -32,11 +32,9 @@ def compile_re(pat: str) -> Pattern:
     flags = re.I | re.X
     return re.compile(pat, flags)
 
-# Puedes ajustar estados por módulo aquí si no definen NEXT_STATE
 STATE_BY_MODULE = {
     "iniciarSesion": "AUTH",
     "cerrarSesion": "END",
-    # agrega más si quieres estados específicos por módulo...
 }
 
 # -------------------- Contexto --------------------

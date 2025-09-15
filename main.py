@@ -1,11 +1,3 @@
-# main.py
-"""
-Punto de entrada del chatbot.
-El autómata carga automáticamente los patrones *_RE y los handlers
-desde utils/modules/*.py, así tú solo mantienes las definiciones ahí.
-Ejecuta: python main.py
-"""
-
 from utils.automata import get_automata
 
 def run_console():
