@@ -4,7 +4,6 @@ import csv
 import json
 from datetime import datetime
 from pathlib import Path
-from collections import defaultdict
 
 # ------------------ Configuración ------------------
 
@@ -25,7 +24,7 @@ def _red(s: str) -> str:
 # ------------------ Utilidades ------------------
 
 def _load_grupos():
-    """Carga el CSV de grupos a caché."""
+    """Carga el CSV de grupos a caché (keys en minúsculas)."""
     global _GRUPOS_CACHE
     if _GRUPOS_CACHE is not None:
         return _GRUPOS_CACHE
@@ -35,7 +34,7 @@ def _load_grupos():
         with open(_GRUPOS_CSV, "r", encoding="utf-8-sig", newline="") as f:
             reader = csv.DictReader(f)
             for raw in reader:
-                row = { (k or "").strip().lower(): (v or "").strip() for k, v in raw.items() }
+                row = {(k or "").strip().lower(): (v or "").strip() for k, v in raw.items()}
                 rows.append(row)
     except FileNotFoundError:
         rows = []
@@ -82,8 +81,8 @@ def _disp(row) -> int:
 
 def _agrupar_por_grupo_y_turno(grupos_rows, turno_label: str):
     """
-    Devuelve un dict { grupo_id: { 'turno':..., 'rows':[...], 'disp_min': int, 'disp_total': int } }
-    filtrando por periodo actual y turno.
+    Dict { grupo_id: { 'turno':..., 'rows':[...], 'disp_min': int, 'disp_total': int } }
+    Filtra por periodo actual y turno; ordenado por grupo_id.
     """
     agg = {}
     for r in grupos_rows:
@@ -106,7 +105,6 @@ def _agrupar_por_grupo_y_turno(grupos_rows, turno_label: str):
             agg[gid]["rows"].append(r)
             agg[gid]["disp_min"] = min(agg[gid]["disp_min"], disp)
             agg[gid]["disp_total"] += max(disp, 0)
-    # Ordenamos por grupo_id
     return dict(sorted(agg.items(), key=lambda kv: kv[0]))
 
 
@@ -119,18 +117,17 @@ def _render_listado_turno(agg: dict) -> str:
     out.append("-" * 22)
     for gid, data in agg.items():
         rows = data["rows"]
-        materias_n = len(rows)
-        # Tomamos un horario y salón de ejemplo (la primera fila)
         ejemplo = rows[0]
         horario = ejemplo.get("horario", "")
         modalidad = ejemplo.get("modalidad", "")
         salon = ejemplo.get("salon", "")
         disp_min = data["disp_min"]
         disp_txt = _red(str(disp_min)) if disp_min is not None else _red("?")
-
-        out.append(f"- {gid} | {materias_n} materias | Horario ej.: {horario} ({modalidad}) | Salón ej.: {salon} | Cupo min: {disp_txt}")
+        out.append(f"- {gid} | {len(rows)} materias | Horario ej.: {horario} ({modalidad}) | Salón ej.: {salon} | Cupo min: {disp_txt}")
     out.append("")
-    out.append("Indica el grupo con:  grupo: 3CM2")
+    out.append("Indica el grupo con:  grupo: 3CV2")
+    out.append("Para cambiar de turno:  turno: M   o   turno: V")
+    out.append("Reiniciar el flujo:  reiniciar")
     return "\n".join(out)
 
 
@@ -144,14 +141,55 @@ def _normaliza(s: str) -> str:
     return (s or "").strip().lower()
 
 
+def _buscar_grupo_en_todos(grupos_rows, gid: str):
+    gid_up = (gid or "").strip().upper()
+    res = [r for r in grupos_rows if (r.get("grupo_id", "").strip().upper() == gid_up and r.get("periodo_id") == _PERIODO_ACTUAL)]
+    return res  # puede estar en M o V (distintas materias/rows)
+
+
+def _log_evento(ctx, turno_label, gid_req, resultado, detalle=None, materias_rows=None):
+    now = datetime.now().isoformat(timespec="seconds")
+    folio = f"INS-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+    entry = {
+        "folio": folio,
+        "ts": now,
+        "periodo": _PERIODO_ACTUAL,
+        "boleta": str(ctx.get("user", "")).strip(),
+        "turno": {"code": ctx.get("insc_turno", ""), "label": turno_label},
+        "grupo_id": gid_req,
+        "resultado": resultado
+    }
+    if detalle is not None:
+        entry["detalle"] = detalle
+    if materias_rows:
+        entry["materias"] = [{
+            "materia_id": r.get("materia_id", ""),
+            "nombre_materia": r.get("nombre_materia", ""),
+            "profesor": r.get("profesor", ""),
+            "horario": r.get("horario", ""),
+            "modalidad": r.get("modalidad", ""),
+            "salon": r.get("salon", ""),
+            "capacidad": r.get("capacidad", ""),
+            "inscritos": r.get("inscritos", ""),
+            "disponibles": max(_disp(r), 0),
+            "slots": r.get("slots", "")
+        } for r in materias_rows]
+    try:
+        _append_inscripcion_log(entry)
+    except Exception:
+        pass
+    return folio
+
 # ------------------ Disparadores / RE ------------------
 
 INSCRIP_RE = r"\b(inscripcion|inscripciones|inscribirme|inscribir|alta\s+de\s+materias|inscribir\s+grupo)\b"
+TURN0_RE   = r"^\s*turno\s*[:=]?\s*(?P<t>(m|matutino|v|vespertino))\s*$"
+GRUPO_RE   = r"^\s*grupo\s*[:=]?\s*(?P<g>\d{1,2}C[MV]\d+)\s*$"
 
-TURN0_RE = r"^\s*turno\s*[:=]?\s*(?P<t>(m|matutino|v|vespertino))\s*$"
-
-GRUPO_RE = r"^\s*grupo\s*[:=]?\s*(?P<g>\d{1,2}C[MV]\d+)\s*$"
-
+# **NUEVO**: dudas genéricas mientras estás en el flujo
+UNCERTAIN_RE = r"^\s*(no\s*s[eé]|no\s*se\s*que\s*elegir|no\s*estoy\s*seguro|ayuda|opciones|men[úu]|menu|ver\s+grupos|listar|lista)\s*$"
+REINICIAR_RE = r"^\s*(reiniciar|cancelar(\s+inscripci[oó]n)?|empezar\s+de\s+nuevo)\s*$"
+CAMBIAR_TURNO_RE = r"^\s*(cambiar\s+turno|otro\s+turno)\s*$"
 
 # ------------------ Handler ------------------
 
@@ -159,29 +197,55 @@ def handle(ctx, text):
     if not ctx.get("auth_ok"):
         return "Primero inicia sesión."
 
-    # Validación de datos
     ok, err = _datos_disponibles()
     if not ok:
         return err
 
     grupos_rows = _load_grupos()
 
+    # ---- Reiniciar flujo ----
+    if re.search(REINICIAR_RE, text, flags=re.I | re.X):
+        ctx.pop("insc_turno", None)
+        ctx.pop("insc_listado", None)
+        return ("Flujo de inscripción reiniciado.\n"
+                "1) Elige turno (M=mañana, V=tarde):\n"
+                "     turno: M    o    turno: V\n"
+                "2) Elige grupo (por ejemplo):\n"
+                "     grupo: 3CM2")
+
+    # ---- Cambiar turno (atajo) ----
+    if re.search(CAMBIAR_TURNO_RE, text, flags=re.I | re.X):
+        return ("Indica el nuevo turno:\n"
+                "  turno: M   (Matutino)\n"
+                "  turno: V   (Vespertino)")
+
     # ---- Selección de turno ----
     m_turno = re.search(TURN0_RE, text, flags=re.I | re.X)
     if m_turno:
         t = m_turno.group("t").strip().lower()
-        turno_label = _turno_label_from_code(t)  # "Matutino" | "Vespertino"
+        turno_label = _turno_label_from_code(t)
         if not turno_label:
             return "Turno no reconocido. Usa: turno: M   o   turno: V"
 
         ctx["insc_turno"] = "M" if turno_label == "Matutino" else "V"
-
         agg = _agrupar_por_grupo_y_turno(grupos_rows, turno_label)
-        # Guardamos listado para el siguiente paso
         ctx["insc_listado"] = agg
 
         return (f"Muy bien, seleccionaste turno {turno_label}.\n"
                 "Ahora dime qué grupo quieres meter, te muestro los disponibles:\n"
+                f"{_render_listado_turno(agg)}")
+
+    # ---- Listar / ayuda contextual ----
+    if re.search(UNCERTAIN_RE, text, flags=re.I | re.X):
+        turno_code = ctx.get("insc_turno")
+        if not turno_code:
+            return ("Para inscribirte, primero indica el turno:\n"
+                    "  turno: M   (Matutino)\n"
+                    "  turno: V   (Vespertino)")
+        turno_label = _turno_label_from_code(turno_code)
+        agg = ctx.get("insc_listado") or _agrupar_por_grupo_y_turno(grupos_rows, turno_label)
+        ctx["insc_listado"] = agg
+        return (f"Sigues en turno {turno_label}. Aquí están los grupos:\n"
                 f"{_render_listado_turno(agg)}")
 
     # ---- Selección de grupo ----
@@ -189,63 +253,48 @@ def handle(ctx, text):
     if m_grupo:
         if not ctx.get("insc_turno"):
             return ("Primero selecciona turno.\n"
-                    "Ejemplos:\n"
                     "  turno: M   (Matutino)\n"
                     "  turno: V   (Vespertino)")
         gid_req = m_grupo.group("g").strip().upper()
         turno_code = ctx["insc_turno"]
         turno_label = _turno_label_from_code(turno_code)
 
-        # Recuperar listado guardado (o regenerar si no existe)
-        agg = ctx.get("insc_listado")
-        if not agg:
-            agg = _agrupar_por_grupo_y_turno(grupos_rows, turno_label)
+        agg = ctx.get("insc_listado") or _agrupar_por_grupo_y_turno(grupos_rows, turno_label)
+        ctx["insc_listado"] = agg
 
         data = agg.get(gid_req)
         if not data:
-            # Recomendación similar
-            similares = [g for g in agg.keys() if _normaliza(g).startswith(_normaliza(gid_req[:3]))]
-            sug = f"Sugerencias: {', '.join(similares)}" if similares else "Verifica el listado."
-            return (f"No identifiqué el grupo '{gid_req}' en turno {turno_label}.\n{sug}")
+            # ¿Existe ese grupo en otro turno?
+            en_todos = _buscar_grupo_en_todos(grupos_rows, gid_req)
+            if en_todos:
+                turno_real = (en_todos[0].get("turno") or "").strip()
+                folio = _log_evento(ctx, turno_label, gid_req, "turno_mismatch",
+                                    detalle=f"Grupo {gid_req} pertenece a turno {turno_real}")
+                # Sugerencias del turno actual
+                suger = ", ".join(list(agg.keys())[:3]) if agg else "sin opciones"
+                return (f"El grupo '{gid_req}' pertenece al turno {turno_real}, pero ahora estás en {turno_label}.\n"
+                        "¿Quieres cambiar de turno o elegir uno de estos?\n"
+                        f"- Cambiar turno:  turno: {'M' if turno_real.lower().startswith('m') else 'V'}\n"
+                        f"- Sugerencias {turno_label}: {suger}\n"
+                        f"(Se registró el intento como {folio})")
+            else:
+                # Sugerencias por prefijo
+                pref = gid_req[:3]
+                similares = [g for g in agg.keys() if _normaliza(g).startswith(_normaliza(pref))]
+                sug = f"Sugerencias: {', '.join(similares)}" if similares else "Verifica el listado con 'ver grupos'."
+                folio = _log_evento(ctx, turno_label, gid_req, "grupo_no_en_turno")
+                return (f"No identifiqué el grupo '{gid_req}' en turno {turno_label}.\n"
+                        f"{sug}\n"
+                        f"(Intento registrado: {folio})")
 
-        # Cupo mínimo del grupo (se calcula a nivel materias)
+        # Cupo a nivel grupo (mínimo entre materias)
         disp_min = data["disp_min"]
         hay_cupo = disp_min > 0
 
-        # Armar payload de log
-        now = datetime.now().isoformat(timespec="seconds")
-        folio = f"INS-{datetime.now().strftime('%Y%m%d%H%M%S')}"
-        materias = []
-        for r in data["rows"]:
-            materias.append({
-                "materia_id": r.get("materia_id", ""),
-                "nombre_materia": r.get("nombre_materia", ""),
-                "profesor": r.get("profesor", ""),
-                "horario": r.get("horario", ""),
-                "modalidad": r.get("modalidad", ""),
-                "salon": r.get("salon", ""),
-                "capacidad": r.get("capacidad", ""),
-                "inscritos": r.get("inscritos", ""),
-                "disponibles": max(_disp(r), 0),
-                "slots": r.get("slots", "")
-            })
-
-        entry = {
-            "folio": folio,
-            "ts": now,
-            "periodo": _PERIODO_ACTUAL,
-            "boleta": str(ctx.get("user", "")).strip(),
-            "turno": {"code": turno_code, "label": turno_label},
-            "grupo_id": gid_req,
-            "resultado": "inscrito" if hay_cupo else "sin_cupo",
-            "cupo_min_grupo": max(disp_min, 0),
-            "materias": materias
-        }
-
-        try:
-            _append_inscripcion_log(entry)
-        except Exception as e:
-            return f"Ocurrió un error al registrar la inscripción: {e}"
+        # Construimos materias para log
+        materias_rows = data["rows"]
+        resultado = "inscrito" if hay_cupo else "sin_cupo"
+        folio = _log_evento(ctx, turno_label, gid_req, resultado, materias_rows=materias_rows)
 
         if hay_cupo:
             return (f"De acuerdo, te inscribo en {gid_req} ({turno_label}).\n"
@@ -253,25 +302,40 @@ def handle(ctx, text):
                     f"Se registró en: {str(_INSCRIPCIONES_LOG)}\n"
                     "¿Deseas ver el detalle de materias u otro grupo?")
         else:
+            # Ofrecer alternativas con mayor cupo
+            alternativas = sorted(
+                [(g, d["disp_min"]) for g, d in agg.items() if d["disp_min"] > 0 and g != gid_req],
+                key=lambda x: -x[1]
+            )[:3]
+            alt_txt = ", ".join([f"{g} (cupo {_red(str(dm))})" for g, dm in alternativas]) if alternativas else "No encontré alternativas con cupo en este turno."
             return (f"Lo intenté, pero {gid_req} ya se llenó (cupo mínimo: {_red(str(disp_min))}).\n"
+                    f"Sugerencias: {alt_txt}\n"
                     f"Quedó registro en: {str(_INSCRIPCIONES_LOG)}\n"
-                    "Elige otro grupo con:  grupo: <ID>")
+                    "Elige otro grupo con:  grupo: <ID>   o cambia de turno:  turno: M/V")
 
-    # ---- Inicio del flujo / ayuda ----
+    # ---- Inicio del flujo / ayuda general ----
     if re.search(INSCRIP_RE, text, flags=re.I):
         return ("Proceso de inscripción:\n"
                 "1) Elige turno (M=mañana, V=tarde):\n"
                 "     turno: M    o    turno: V\n"
                 "2) Elige grupo (por ejemplo):\n"
-                "     grupo: 3CM2\n")
+                "     grupo: 3CM2\n"
+                "Tip: si te atoras, escribe 'opciones' o 'ver grupos'.")
 
-    # Si no matchea nada, mensaje guía
+    # ---- Si no matchea nada y hay contexto, devolvemos ayuda contextual ----
+    if ctx.get("insc_turno"):
+        turno_label = _turno_label_from_code(ctx["insc_turno"])
+        agg = ctx.get("insc_listado") or _agrupar_por_grupo_y_turno(grupos_rows, turno_label)
+        ctx["insc_listado"] = agg
+        return (f"No entendí, pero sigues en turno {turno_label}.\n"
+                f"{_render_listado_turno(agg)}")
+
+    # Mensaje guía por defecto
     return ("Para inscribirte, primero indica el turno:\n"
             "  turno: M   (Matutino)\n"
             "  turno: V   (Vespertino)\n"
             "Luego indica el grupo:\n"
-            "  grupo: 3CM2")
-
+            "  grupo: 3CV2   (o escribe 'inscripcion' para ver los pasos)")
 
 # Mantener el estado de autenticado
 NEXT_STATE = "AUTH_OK"
