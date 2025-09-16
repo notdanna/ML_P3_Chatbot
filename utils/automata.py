@@ -52,8 +52,8 @@ class Automata:
         self._fallback: Optional[Callable[[Context, str], str]] = None
         self._load_routes_from_modules()
         self.fallback(lambda ctx, text:
-            "No entendí tu solicitud. Prueba con comandos como 'iniciar sesión', "
-            "'info académica', 'trámites', 'inscripción', 'materias' o 'cerrar sesión'.")
+            "No entendí tu solicitud. Prueba con comandos como 'iniciar sesion', "
+            "'info academica', 'tramites', 'inscripcion', 'materias' o 'cerrar sesion'.")
 
     # Descubre utils.modules.*, importa, y registra *_RE -> handle
     def _load_routes_from_modules(self) -> None:
@@ -121,18 +121,19 @@ class Automata:
     #  ejecuta su handler y actualiza el estado. Si nada coincide, 
     # llama a un fallback o devuelve un mensaje por defecto.
     def step(self, text: str) -> str:
-            t = norm(text)
-            for rx, fn, nxt, origin, allowed in self._routes:
-                # Gating por estado actual
-                if allowed and self.ctx.state not in allowed:
-                    continue
-                if rx.search(t):
-                    out = fn(self.ctx, text)
-                    self.ctx.state = nxt or self.ctx.state
-                    return out
-            if self._fallback:
-                return self._fallback(self.ctx, text)
-            return "No hay manejador para tu solicitud."
+        t = norm(text)
+        for rx, fn, nxt, origin, allowed in self._routes:
+            if allowed and self.ctx.state not in allowed:
+                # print(f"[SKIP] estado {self.ctx.state} no en {allowed} para {origin}")
+                continue
+            if rx.search(t):
+                # print(f"[MATCH] {origin} -> {rx.pattern}")
+                out = fn(self.ctx, text)
+                if nxt:
+                    self.ctx.state = nxt
+                    self.ctx["state"] = nxt
+                return out
+        return self._fallback(self.ctx, text) if self._fallback else "No hay manejador..."
 
     def reset(self) -> None:
             self.ctx = Context()
