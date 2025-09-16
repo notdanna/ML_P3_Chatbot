@@ -1,33 +1,36 @@
-grupo_id,materia_id,profesor,horario,turno,modalidad,salon,capacidad,inscritos,periodo_id,slots
-G-101,MAT101,Dr. Rodriguez Martinez,LuMi 07:00-09:00,Matutino,Presencial,A-101,35,28,2025-1,LU-07;LU-08;MI-07;MI-08
-G-102,MAT101,Mtra. Gonzalez Lopez,MaJu 10:00-12:00,Matutino,Presencial,A-102,35,32,2025-1,MA-10;MA-11;JU-10;JU-11
-G-103,MAT102,Dr. Hernandez Silva,LuMi 09:00-11:00,Matutino,Presencial,B-201,30,25,2025-1,LU-09;LU-10;MI-09;MI-10
-G-104,MAT102,Mtro. Jimenez Torres,MaJu 14:00-16:00,Vespertino,Presencial,B-202,30,18,2025-1,MA-14;MA-15;JU-14;JU-15
-G-105,MAT103,Mtra. Lopez Ramirez,LuMiVi 07:00-08:30,Matutino,Presencial,LAB-C1,25,22,2025-1,LU-07;MI-07;VI-07
-G-106,MAT103,Dr. Martinez Vega,LuMiVi 18:00-19:30,Nocturno,Presencial,LAB-C2,25,15,2025-1,LU-18;MI-18;VI-18
-G-107,MAT104,Ing. Fernandez Cruz,MaJu 08:00-10:00,Matutino,Hibrida,D-301,30,27,2025-1,MA-08;MA-09;JU-08;JU-09
-G-108,MAT104,Dr. Morales Gutierrez,MaJu 16:00-18:00,Vespertino,En linea,ZOOM-A,40,35,2025-1,MA-16;MA-17;JU-16;JU-17
-G-109,MAT105,Dra. Sanchez Mendez,LuMi 11:00-13:00,Matutino,Presencial,LAB-F1,25,20,2025-1,LU-11;LU-12;MI-11;MI-12
-G-110,MAT105,Mtro. Castro Vargas,MaJu 19:00-21:00,Nocturno,Presencial,LAB-F2,25,12,2025-1,MA-19;MA-20;JU-19;JU-20
-G-201,MAT201,Dr. Ruiz Herrera,LuMi 13:00-15:00,Vespertino,Presencial,E-401,30,16,2025-1,LU-13;LU-14;MI-13;MI-14
-G-202,MAT202,Mtra. Diaz Flores,MaJu 07:00-09:00,Matutino,Presencial,LAB-Q1,20,18,2025-1,MA-07;MA-08;JU-07;JU-08
-G-203,MAT203,Dr. Torres Aguilar,LuMi 15:00-17:00,Vespertino,Presencial,F-501,35,29,2025-1,LU-15;LU-16;MI-15;MI-16
-G-204,MAT204,Dra. Mendoza Soto,MaJu 09:00-11:00,Matutino,Presencial,A-103,35,31,2025-1,MA-09;MA-10;JU-09;JU-10
-G-301,MAT301,Mtro. Vargas Luna,LuMi 08:00-10:00,Matutino,Presencial,B-203,30,24,2025-1,LU-08;LU-09;MI-08;MI-09
-G-302,MAT302,Dr. Silva Ortega,LuMiVi 14:00-15:30,Vespertino,Presencial,LAB-C3,25,19,2025-1,LU-14;MI-14;VI-14
-G-303,MAT303,Ing. Ortega Romero,MaJu 11:00-13:00,Matutino,Hibrida,D-302,30,23,2025-1,MA-11;MA-12;JU-11;JU-12
-G-304,MAT304,Dra. Ramirez Peña,LuMi 17:00-19:00,Vespertino,Presencial,LAB-F3,25,17,2025-1,LU-17;LU-18;MI-17;MI-18
-G-401,MAT401,Dr. Herrera Castro,MaJu 13:00-15:00,Vespertino,Presencial,E-402,30,14,2025-1,MA-13;MA-14;JU-13;JU-14
-G-402,MAT402,Mtra. Aguilar Moreno,LuMi 10:00-12:00,Matutino,Presencial,LAB-Q2,20,16,2025-1,LU-10;LU-11;MI-10;MI-11
-G-403,MAT403,Dr. Soto Jimenez,MaJu 15:00-17:00,Vespertino,En linea,ZOOM-B,40,33,2025-1,MA-15;MA-16;JU-15;JU-16
-G-404,MAT404,Dra. Luna Rodriguez,LuMi 12:00-14:00,Matutino,Presencial,A-104,35,26,2025-1,LU-12;LU-13;MI-12;MI-13
-G-501,MAT501,Dr. Peña Gonzalez,LuMiVi 16:00-17:30,Vespertino,Presencial,LAB-C4,25,21,2025-1,LU-16;MI-16;VI-16
-G-502,MAT502,Mtra. Castro Silva,LuMiVi 08:30-10:00,Matutino,Presencial,LAB-C5,25,18,2025-1,LU-08;MI-08;VI-08
-G-503,MAT503,Dr. Moreno Torres,MaJu 17:00-19:00,Vespertino,Hibrida,D-303,30,22,2025-1,MA-17;MA-18;JU-17;JU-18
-G-504,MAT504,Ing. Vega Herrera,LuMi 14:00-16:00,Vespertino,Presencial,LAB-E1,20,15,2025-1,LU-14;LU-15;MI-14;MI-15
-G-505,MAT505,Dra. Gutierrez Diaz,MaJu 12:00-14:00,Matutino,Presencial,LAB-Q3,20,13,2025-1,MA-12;MA-13;JU-12;JU-13
-G-601,MAT601,Dr. Flores Ruiz,LuMiVi 10:00-11:30,Matutino,Presencial,LAB-BD1,30,24,2025-1,LU-10;MI-10;VI-10
-G-602,MAT602,Dra. Mendez Vargas,MaJu 08:00-10:00,Matutino,Hibrida,LAB-IA1,25,20,2025-1,MA-08;MA-09;JU-08;JU-09
-G-603,MAT603,Mtro. Cruz Ortega,LuMiVi 15:00-16:30,Vespertino,Presencial,LAB-WEB1,25,19,2025-1,LU-15;MI-15;VI-15
-G-604,MAT604,Ing. Romero Luna,MaJu 18:00-20:00,Nocturno,Presencial,LAB-MOV1,20,16,2025-1,MA-18;MA-19;JU-18;JU-19
-G-605,MAT605,Dr. Aguilar Soto,LuMi 16:00-18:00,Vespertino,Presencial,LAB-SEC1,20,14,2025-1,LU-16;LU-17;MI-16;MI-17
+grupo_id,materia_id,nombre_materia,profesor,horario,turno,modalidad,salon,capacidad,inscritos,periodo_id,slots
+3CM1,MAT101,Calculo Diferencial e Integral I,Dr. Rodriguez Martinez,LuMi 07:00-09:00,Matutino,Presencial,A-101,35,28,2025-1,LU-07;LU-08;MI-07;MI-08
+3CM1,MAT102,Algebra Lineal y Geometria Analitica,Dr. Hernandez Silva,LuMi 09:00-11:00,Matutino,Presencial,B-201,30,25,2025-1,LU-09;LU-10;MI-09;MI-10
+3CM1,MAT103,Programacion Estructurada,Mtra. Lopez Ramirez,LuMiVi 07:00-08:30,Matutino,Presencial,LAB-C1,25,22,2025-1,LU-07;MI-07;VI-07
+3CM1,MAT104,Fundamentos de Redes de Computadoras,Ing. Fernandez Cruz,MaJu 08:00-10:00,Matutino,Hibrida,D-301,30,27,2025-1,MA-08;MA-09;JU-08;JU-09
+3CM1,MAT105,Fisica para Ingenieria,Dra. Sanchez Mendez,LuMi 11:00-13:00,Matutino,Presencial,LAB-F1,25,20,2025-1,LU-11;LU-12;MI-11;MI-12
+
+3CM2,MAT101,Calculo Diferencial e Integral I,Mtra. Gonzalez Lopez,MaJu 10:00-12:00,Matutino,Presencial,A-102,35,32,2025-1,MA-10;MA-11;JU-10;JU-11
+3CM2,MAT102,Algebra Lineal y Geometria Analitica,Mtro. Jimenez Torres,LuMi 09:00-11:00,Matutino,Presencial,B-202,30,26,2025-1,LU-09;LU-10;MI-09;MI-10
+3CM2,MAT103,Programacion Estructurada,Dr. Martinez Vega,LuMiVi 08:30-10:00,Matutino,Presencial,LAB-C2,25,21,2025-1,LU-08;MI-08;VI-08
+3CM2,MAT104,Fundamentos de Redes de Computadoras,Dr. Morales Gutierrez,MaJu 08:00-10:00,Matutino,Hibrida,D-302,30,28,2025-1,MA-08;MA-09;JU-08;JU-09
+3CM2,MAT105,Fisica para Ingenieria,Mtro. Castro Vargas,LuMi 11:00-13:00,Matutino,Presencial,LAB-F2,25,23,2025-1,LU-11;LU-12;MI-11;MI-12
+
+3CM3,MAT101,Calculo Diferencial e Integral I,Dr. Ruiz Herrera,LuMi 07:00-09:00,Matutino,Presencial,E-401,35,30,2025-1,LU-07;LU-08;MI-07;MI-08
+3CM3,MAT102,Algebra Lineal y Geometria Analitica,Mtra. Diaz Flores,LuMi 09:00-11:00,Matutino,Presencial,LAB-Q1,30,27,2025-1,LU-09;LU-10;MI-09;MI-10
+3CM3,MAT103,Programacion Estructurada,Dr. Torres Aguilar,LuMi 08:30-10:00,Matutino,Presencial,F-501,25,21,2025-1,LU-08;MI-08;VI-08
+3CM3,MAT104,Fundamentos de Redes de Computadoras,Dra. Mendoza Soto,MaJu 09:00-11:00,Matutino,Hibrida,A-103,30,26,2025-1,MA-09;MA-10;JU-09;JU-10
+3CM3,MAT105,Fisica para Ingenieria,Mtro. Vargas Luna,LuMi 11:00-13:00,Matutino,Presencial,B-203,25,22,2025-1,LU-11;LU-12;MI-11;MI-12
+
+3CV1,MAT101,Calculo Diferencial e Integral I,Dr. Hernandez Silva,MaJu 14:00-16:00,Vespertino,Presencial,B-201,35,28,2025-1,MA-14;MA-15;JU-14;JU-15
+3CV1,MAT102,Algebra Lineal y Geometria Analitica,Mtro. Jimenez Torres,LuMi 15:00-17:00,Vespertino,Presencial,B-202,30,24,2025-1,LU-15;LU-16;MI-15;MI-16
+3CV1,MAT103,Programacion Estructurada,Mtra. Lopez Ramirez,MaJu 16:00-18:00,Vespertino,Presencial,LAB-C1,25,19,2025-1,MA-16;MA-17;JU-16;JU-17
+3CV1,MAT104,Fundamentos de Redes de Computadoras,Ing. Fernandez Cruz,LuMi 17:00-19:00,Vespertino,Hibrida,D-301,30,26,2025-1,LU-17;LU-18;MI-17;MI-18
+3CV1,MAT105,Fisica para Ingenieria,Dra. Sanchez Mendez,MaJu 18:00-20:00,Vespertino,Presencial,LAB-F1,25,20,2025-1,MA-18;MA-19;JU-18;JU-19
+
+3CV2,MAT101,Calculo Diferencial e Integral I,Mtra. Gonzalez Lopez,MaJu 13:00-15:00,Vespertino,Presencial,A-102,35,30,2025-1,MA-13;MA-14;JU-13;JU-14
+3CV2,MAT102,Algebra Lineal y Geometria Analitica,Dr. Hernandez Silva,LuMi 15:00-17:00,Vespertino,Presencial,B-201,30,23,2025-1,LU-15;LU-16;MI-15;MI-16
+3CV2,MAT103,Programacion Estructurada,Dr. Martinez Vega,LuMiVi 16:00-17:30,Vespertino,Presencial,LAB-C2,25,19,2025-1,LU-16;MI-16;VI-16
+3CV2,MAT104,Fundamentos de Redes de Computadoras,Dr. Morales Gutierrez,MaJu 17:00-19:00,Vespertino,Hibrida,D-302,30,21,2025-1,MA-17;MA-18;JU-17;JU-18
+3CV2,MAT105,Fisica para Ingenieria,Mtro. Castro Vargas,LuMi 18:00-20:00,Vespertino,Presencial,LAB-F2,25,18,2025-1,LU-18;LU-19;MI-18;MI-19
+
+3CV3,MAT101,Calculo Diferencial e Integral I,Dr. Ruiz Herrera,MaJu 14:00-16:00,Vespertino,Presencial,E-401,35,31,2025-1,MA-14;MA-15;JU-14;JU-15
+3CV3,MAT102,Algebra Lineal y Geometria Analitica,Mtra. Diaz Flores,LuMi 15:00-17:00,Vespertino,Presencial,LAB-Q1,30,25,2025-1,LU-15;LU-16;MI-15;MI-16
+3CV3,MAT103,Programacion Estructurada,Dr. Torres Aguilar,LuMiVi 16:00-17:30,Vespertino,Presencial,F-501,25,20,2025-1,LU-16;MI-16;VI-16
+3CV3,MAT104,Fundamentos de Redes de Computadoras,Dra. Mendoza Soto,MaJu 17:00-19:00,Vespertino,Hibrida,A-103,30,22,2025-1,MA-17;MA-18;JU-17;JU-18
+3CV3,MAT105,Fisica para Ingenieria,Mtro. Vargas Luna,LuMi 18:00-20:00,Vespertino,Presencial,B-203,25,17,2025-1,LU-18;LU-19;MI-18;MI-19
