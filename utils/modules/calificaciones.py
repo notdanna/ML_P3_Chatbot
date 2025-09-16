@@ -123,14 +123,11 @@ def handle(ctx, text):
         return (f"Tus calificaciones ({boleta}):\n{listado}\n\n"
                 "¿Quieres 'info academica', 'materias', 'tramites' o 'inscripcion'?")
     else:
-        # Modo compatible: el CSV no tiene 'boleta' -> mostramos todo (o un resumen)
-        aviso = ("Aviso: el archivo de calificaciones no tiene columna 'boleta'. "
-                 "Te muestro el contenido general. Para personalizar por alumno, "
-                 "añade la columna 'boleta' y una fila por estudiante.")
+
         listado = _render_califs(rows, limit=20)
         if len(rows) > 20:
             listado += f"\n… y {len(rows)-20} más."
-        return (f"{aviso}\n\n{listado}\n\n"
+        return (f"\n\n{listado}\n\n"
                 "¿Quieres 'info academica', 'materias', 'tramites' o 'inscripcion'?")
 
 # Sugerimos mantener este estado para subflujo de calificaciones
