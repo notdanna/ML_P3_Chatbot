@@ -171,8 +171,13 @@ def _render_kardex(rows, stats):
 
 # ------------------ Disparador / RE ------------------
 
-INFOACAD_RE = r"\b(info(\s+academica)?|kardex|historial\s+academico)\b"
-
+INFOACAD_RE = r"""
+\b(
+    info\s+academica      # 'info academica' (norm() ya quita acentos)
+  | kardex
+  | historial\s+academico
+)\b
+"""
 
 # ------------------ Handler ------------------
 

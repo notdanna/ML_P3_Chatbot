@@ -110,7 +110,7 @@ def handle(ctx, text):
             return f"Usuario '{boleta}' encontrado. Ahora dime tu contraseña."
 
         ctx.state = ctx["state"] = "AUTH"
-        return "Ok, dime tu usuario (boleta de 10 dígitos, ej: 2023630000)."
+        return "Hola, dime tu usuario (boleta de 10 dígitos, ej: 2023630000)."
 
     # 2) Contraseña
     if not auth_ok:
