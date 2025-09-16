@@ -1,23 +1,12 @@
-import re, unicodedata
+# utils/modules/inscripcion.py
+INSCRIP_RE = r"\b(inscripcion|inscribirme|inscribir|seleccion\s+de\s+(turno|grupo))\b"
+
 def handle(ctx, text):
-    return "Proceso de inscripción iniciado (demo)."
+    if not ctx.get("auth_ok"):
+        return "Primero inicia sesión."
+    # Simulación
+    return ("Inscripción: di 'materias' para ver oferta, o 'seleccionar grupo <CLAVE>' "
+            "(lógica a implementar). También puedes pedir 'ver calificaciones'.")
 
-
-Inscripcion_RE = r"""
-(?i)\b(
-    inscripcion | preinscripcion | reinscripcion | inscrib\w* | reinscrib\w* |
-    alta\s+de\s+materias? | carga\s+de\s+materias? | cargar\s+materias? |
-    seleccionar\s+materias? | elegir\s+materias? |
-    turno | ficha | cita | ventana | periodo |
-    fechas?\s+de\s+inscripcion | calendario\s+de\s+inscripcion
-)\b
-"""
-
-Informacion_personal_RE = r"""
-(?i)\b(
-    informacion | datos | perfil | personales? | contacto | medicos? |
-    domicilio | direccion | telefono | celular | correo | email |
-    curp | rfc | nss | imss |
-    seguro\s+facultativo | emergencia | alergias | tipo\s+de\s+sangre
-)\b
-"""
+NEXT_STATE = "INSCRIPCION"
+ALLOWED_STATES = {"AUTH_OK", "MATERIAS", "INSCRIPCION"}
