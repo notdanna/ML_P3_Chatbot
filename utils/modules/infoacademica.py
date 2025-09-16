@@ -177,7 +177,8 @@ INFOACAD_RE = r"\b(info(\s+academica)?|kardex|historial\s+academico)\b"
 # ------------------ Handler ------------------
 
 def handle(ctx, text):
-    if not ctx.get("auth_ok"):
+    # Debe estar logueado
+    if not ctx.get("user"):
         return "Primero inicia sesión."
     
     # Verificar disponibilidad del kardex
