@@ -1,6 +1,6 @@
 boleta,materia,grupo_id,periodo_id,parcial1,parcial2,final,resultado
-2023630000,Calculo,6CM2,2025-1,8,9,9,Aprobado
-2023630000,Fisica,6CM2,2025-1,7,6,8,Aprobado
-2023630000,Quimica,6CM2,2025-1,5,4,6,Aprobado
-2023630000,Programacion,6CM2,2025-1,9,8,10,Aprobado
-2023630000,Algebra,6CM2,2025-1,6,5,7,Aprobado
+2023630000,Teoria de Algoritmos y Estructuras de Datos,G-501,2025-1,8,7,,En curso
+2023630000,Desarrollo de Software Empresarial,G-502,2025-1,9,8,9,Aprobado
+2023630000,Seguridad en Redes y Criptografia,G-503,2025-1,7,6,,En curso
+2023630000,Sistemas Digitales y Microprocesadores,G-504,2025-1,8,9,8,Aprobado
+2023630000,Ciencia de Materiales y Nanotecnologia,G-505,2025-1,6,5,6,Aprobado

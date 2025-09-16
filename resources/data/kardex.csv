@@ -1,0 +1,23 @@
+boleta,semestre,materia,grupo,profesor,horario,calificacion
+2023630000,2023-1,Calculo Diferencial e Integral I,G-101,Dr. Rodriguez Martinez,LuMi 07:00-09:00,9
+2023630000,2023-1,Algebra Lineal y Geometria Analitica,G-103,Dr. Hernandez Silva,LuMi 09:00-11:00,8
+2023630000,2023-1,Programacion Estructurada,G-105,Mtra. Lopez Ramirez,LuMiVi 07:00-08:30,10
+2023630000,2023-1,Fundamentos de Redes de Computadoras,G-107,Ing. Fernandez Cruz,MaJu 08:00-10:00,10
+2023630000,2023-1,Fisica para Ingenieria,G-109,Dra. Sanchez Mendez,LuMi 11:00-13:00,8
+2023630000,2023-2,Mecanica Clasica Aplicada,G-201,Dr. Ruiz Herrera,LuMi 13:00-15:00,7
+2023630000,2023-2,Quimica para Ingenieros,G-202,Mtra. Diaz Flores,MaJu 07:00-09:00,6
+2023630000,2023-2,Estadistica y Probabilidad,G-203,Dr. Torres Aguilar,LuMi 15:00-17:00,7
+2023630000,2023-2,Calculo Diferencial e Integral II,G-204,Dra. Mendoza Soto,MaJu 09:00-11:00,4
+2023630000,2024-1,Algebra Superior y Matematicas Discretas,G-301,Mtro. Vargas Luna,LuMi 08:00-10:00,9
+2023630000,2024-1,Programacion Orientada a Objetos,G-302,Dr. Silva Ortega,LuMiVi 14:00-15:30,8
+2023630000,2024-1,Administracion de Redes y Protocolos,G-303,Ing. Ortega Romero,MaJu 11:00-13:00,9
+2023630000,2024-1,Fisica Moderna y Electronica,G-304,Dra. Ramirez Peña,LuMi 17:00-19:00,8
+2023630000,2024-2,Dinamica de Sistemas Mecanicos,G-401,Dr. Herrera Castro,MaJu 13:00-15:00,7
+2023630000,2024-2,Quimica Organica e Inorganica,G-402,Mtra. Aguilar Moreno,LuMi 10:00-12:00,7
+2023630000,2024-2,Metodos Estadisticos y Analisis de Datos,G-403,Dr. Soto Jimenez,MaJu 15:00-17:00,8
+2023630000,2024-2,Calculo Vectorial y Ecuaciones Diferenciales,G-404,Dra. Luna Rodriguez,LuMi 12:00-14:00,10
+2023630000,2025-1,Teoria de Algoritmos y Estructuras de Datos,G-501,Dr. Peña Gonzalez,LuMiVi 16:00-17:30,
+2023630000,2025-1,Desarrollo de Software Empresarial,G-502,Mtra. Castro Silva,LuMiVi 08:30-10:00,9
+2023630000,2025-1,Seguridad en Redes y Criptografia,G-503,Dr. Moreno Torres,MaJu 17:00-19:00,
+2023630000,2025-1,Sistemas Digitales y Microprocesadores,G-504,Ing. Vega Herrera,LuMi 14:00-16:00,8
+2023630000,2025-1,Ciencia de Materiales y Nanotecnologia,G-505,Dra. Gutierrez Diaz,MaJu 12:00-14:00,6

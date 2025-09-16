@@ -1,4 +1,28 @@
 materia_id,clave,nombre,creditos,plan,area
-MAT101,AI101,Introduccion a la Inteligencia Artificial,8,2023,Optativa
-MAT102,MATFIS01,Fundamentos de Matematicas y Fisica,10,2023,Tronco Comun
-MAT201,PRG02,Programacion II,9,2023,Obligatoria
+MAT101,CALC1,Calculo Diferencial e Integral I,8,2023,Tronco Comun
+MAT102,ALG1,Algebra Lineal y Geometria Analitica,8,2023,Tronco Comun
+MAT103,PROG1,Programacion Estructurada,10,2023,Tronco Comun
+MAT104,RED1,Fundamentos de Redes de Computadoras,8,2023,Tronco Comun
+MAT105,FIS1,Fisica para Ingenieria,8,2023,Tronco Comun
+MAT201,MEC1,Mecanica Clasica Aplicada,6,2023,Obligatoria
+MAT202,QUIM1,Quimica para Ingenieros,6,2023,Obligatoria
+MAT203,EST1,Estadistica y Probabilidad,8,2023,Obligatoria
+MAT204,CALC2,Calculo Diferencial e Integral II,8,2023,Obligatoria
+MAT301,ALG2,Algebra Superior y Matematicas Discretas,8,2023,Obligatoria
+MAT302,PROG2,Programacion Orientada a Objetos,10,2023,Obligatoria
+MAT303,RED2,Administracion de Redes y Protocolos,8,2023,Obligatoria
+MAT304,FIS2,Fisica Moderna y Electronica,8,2023,Obligatoria
+MAT401,MEC2,Dinamica de Sistemas Mecanicos,6,2023,Obligatoria
+MAT402,QUIM2,Quimica Organica e Inorganica,6,2023,Obligatoria
+MAT403,EST2,Metodos Estadisticos y Analisis de Datos,8,2023,Obligatoria
+MAT404,CALC3,Calculo Vectorial y Ecuaciones Diferenciales,8,2023,Obligatoria
+MAT501,ALG3,Teoria de Algoritmos y Estructuras de Datos,10,2023,Especialidad
+MAT502,PROG3,Desarrollo de Software Empresarial,10,2023,Especialidad
+MAT503,RED3,Seguridad en Redes y Criptografia,8,2023,Especialidad
+MAT504,FIS3,Sistemas Digitales y Microprocesadores,8,2023,Especialidad
+MAT505,QUIM3,Ciencia de Materiales y Nanotecnologia,6,2023,Especialidad
+MAT601,BD1,Bases de Datos Relacionales,8,2023,Especialidad
+MAT602,IA1,Inteligencia Artificial y Machine Learning,10,2023,Especialidad
+MAT603,WEB1,Desarrollo Web Full Stack,10,2023,Especialidad
+MAT604,MOV1,Desarrollo de Aplicaciones Moviles,8,2023,Especialidad
+MAT605,CYBER1,Ciberseguridad y Ethical Hacking,8,2023,Especialidad

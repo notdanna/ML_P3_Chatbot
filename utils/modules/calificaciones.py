@@ -134,5 +134,5 @@ def handle(ctx, text):
                 "¿Quieres 'info academica', 'materias', 'tramites' o 'inscripcion'?")
 
 # Sugerimos mantener este estado para subflujo de calificaciones
-NEXT_STATE = "CALIFICACIONES"
-ALLOWED_STATES = {"AUTH_OK", "CALIFICACIONES"}
+NEXT_STATE = "AUTH_OK"  # Mantener el estado de autenticado
+ALLOWED_STATES = {"AUTH_OK"}  # Solo necesita estar autenticado
