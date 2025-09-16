@@ -1,5 +1,6 @@
-alumno_id,grupo_id,periodo_id,parcial1,parcial2,final,resultado
-A001,G-105,2025-1,8,9,9,Aprobado
-A001,G-220,2025-1,9,9,10,Aprobado
-A002,G-110,2025-1,7,8,8,Aprobado
-A003,G-105,2025-1,6,7,6,Reprobado
+boleta,materia,grupo_id,periodo_id,parcial1,parcial2,final,resultado
+2023630000,Calculo,6CM2,2025-1,8,9,9,Aprobado
+2023630000,Fisica,6CM2,2025-1,7,6,8,Aprobado
+2023630000,Quimica,6CM2,2025-1,5,4,6,Aprobado
+2023630000,Programacion,6CM2,2025-1,9,8,10,Aprobado
+2023630000,Algebra,6CM2,2025-1,6,5,7,Aprobado
