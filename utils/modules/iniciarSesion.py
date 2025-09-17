@@ -59,4 +59,4 @@ def handle(ctx, text):
 
 # No pisamos el estado desde el autómata; lo controla el handler
 NEXT_STATE = ""
-ALLOWED_STATES = {"START", "AUTH", "AUTH_OK"}
+ALLOWED_STATES = {"START", "AUTH", "AUTH_OK", "END"}

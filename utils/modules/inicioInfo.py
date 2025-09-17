@@ -3,7 +3,7 @@ INICIOINFO_RE = r"\b(inicio\s*info|informacion\s+inicial|bienvenida)\b"
 def handle(ctx, text):
     if ctx.get("auth_ok"):
         try:
-            with open("/home/miguelg/ML/assig3/ML_P3_Chatbot/resources/infoAlumnos", "r", encoding="utf-8") as f:
+            with open("/resources/infoAlumnos", "r", encoding="utf-8") as f:
                 data = f.read()
             return data
         except Exception as e:

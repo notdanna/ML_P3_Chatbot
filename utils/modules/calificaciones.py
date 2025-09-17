@@ -93,7 +93,7 @@ def _render_califs(rows, limit=None):
 
 # ------------------ Disparador / RE ------------------
 
-CALIF_RE = r"\b(calificacion(?:es)?|boleta|ver\s+calificacion(?:es)?)\b"
+CALIF_RE = r"\b(calificacion(?:es)?|ver\s+calificacion(?:es)?)\b"
 
 
 # ------------------ Handler ------------------

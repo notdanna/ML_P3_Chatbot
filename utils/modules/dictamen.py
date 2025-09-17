@@ -8,13 +8,6 @@ from pathlib import Path
 # ------------------ Configuración de datos ------------------
 
 
-# Colores ANSI para terminal
-_ANSI_RED = "\033[31m"
-_ANSI_RESET = "\033[0m"
-def _red(s: str) -> str:
-    return f"{_ANSI_RED}{s}{_ANSI_RESET}"
-
-
 # Rutas absolutas
 _KARDEX_CSV = Path(__file__).resolve().parents[2] / "resources" / "data" / "kardex.csv"
 
@@ -281,9 +274,9 @@ def handle(ctx, text):
         f"(Cursada: {m.get('semestre','')}, Calif: {m.get('calificacion','')}, "
         f"{m.get('semestres_transcurridos',0)} semestres atrás)\n\n"
         "TU CARTA DEBE EMPEZAR CON:\n"
-        f"  {_red('carta: <tu texto>')} \n"
+        f"  ('carta: <tu texto>') \n"
         "Ejemplo:\n"
-        f"  {_red('carta:')} Solicito dictamen debido a... Me comprometo a... He ajustado mi horario para...")
+        f"  ('carta:') Solicito dictamen debido a... Me comprometo a... He ajustado mi horario para...")
 
 
     # Si hay varias, mostrar menú numerado
