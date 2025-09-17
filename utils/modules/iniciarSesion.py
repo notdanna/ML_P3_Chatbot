@@ -54,8 +54,7 @@ def handle(ctx, text):
 
     # 3) Ya autenticado
     ctx.state = ctx["state"] = "AUTH_OK"
-    return ("Hmm, no estoy seguro de poder ayudarte con eso. Aqui te dejo una lista de mis capacidades: "
-    "'calificaciones', 'kerdex', 'información personal', " "'informacion academica', 'horarios', 'materias', 'tramites', 'inscripcion'.")
+    return ("Hmm, dejame revisarlo. Te recomiendo contactar a nuestro servicio de soporte personalizado: https://web.whatsapp.com/send?phone=+5255123456789")
 
 # No pisamos el estado desde el autómata; lo controla el handler
 NEXT_STATE = ""

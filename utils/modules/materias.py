@@ -173,7 +173,7 @@ def _render_materias_grupos(grupos, materias_dict, stats):
 
 # ------------------ Disparador / RE ------------------
 
-MATERIAS_RE = r"\b(materia(?:s)?|lista\s+de\s+materias|ver\s+materias|grupos|cupos?)\b"
+MATERIAS_RE = r"\b(materia|lista\s+de\s+materias|ver\s+materias|grupos|materias|cupos?)\b"
 
 
 # ------------------ Handler ------------------
