@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--Documento probatorio de escolaridad-->
+<CertificadoTramiteDigital>
+  <version>DAE_Web_v0.5</version>
+  <CodigoTramite>188582</CodigoTramite>
+  <FirmaDigital>
+    <CadenaOriginal>63|ESCUELA SUPERIOR DE CÓMPUTO||09DPN0053X|20251|CONSTANCIA DE INSCRIPCION|2023630011|GOMEZ LOPEZ MIGUEL ANGEL|GOLM031120HDFMPGA0|C|ING. EN SIS. COMPUTACIONALES|20|0|SIN ESPECIALIDAD|45.74|8.64|matutino|6CM2|R|1|8 semestres|387|26 agosto de 2024|21 enero de 2025|Ciudad de México a los 10 días de Septiembre de 2024</CadenaOriginal>
+    <FirmaResponsable>
+      <RFC>LOVD951217L66</RFC>
+      <Firmante>DANIELA LOPEZ VEGA</Firmante>
+      <NombreAutoridad>DANIELA LOPEZ VEGA</NombreAutoridad>
+      <Cargo>DEPARTAMENTO DE GESTIÓN ESCOLAR</Cargo>
+      <SerieCertificado>275106190557734483187066766866273942463388594736</SerieCertificado>
+      <LlavePublica>-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvFEjJqVrxrklnpG7Y2Fu
+T63stwPCtxk8wJqQx2sdMcxdeT8OcqIzUSruW/fUkovgNdLW/RNm8WzWEhmteQ6p
+lO5qmxtc5yizTP/T0rRlBNUR84bfGQrsgWoOQjn/hHLKDPVj8AhZiB2A8KDoZNXP
+olABSnByPaydDVsj2qfiqcJirrbinw2txtkQbAe8BEJwdwUZ8M/nbZ0NPUfWrCZl
+vgkwn8Vc3QpJb7PHx0NP4lQChOksCohzqpYADLD3WTazFsuDszJrJrwev2bAEfW0
+yNzIoIPygeEROquZVNuoj/HGoPtSSm0JrDALILlYZJITuosFi7mxsLStd+GbCfru
+XwIDAQAB
+-----END PUBLIC KEY-----
+</LlavePublica>
+      <Firma>qY+BAr2m1SqEKnGsWVCN29EO7Kt28Hz07Bz8FjNImJqh4t/QSzbnJlg8yZHgmD7n5+bOggXjhUzupHsGGJLYbE/L+NtDtKNz5HZdd84HIVnk0x4EyCakwy4GpA5MkVVFQW2GvKSM50RUiO07yJbVr4Yx8Tn0pbaIQW/zagIWpBjouqO7xjfP0fdvGjljYbxeAqUXzCZ1l8Schnk14kZIXIRLZX1IendRlY97UWKjQRgJoGW19JCO2eV3Nbh40CHu4C+ZN0cCqkoc7ZFWRpPm7zxEYD9XngPzhgqq4Ufdlji48WoFP8Grv0EZKO4Zh4uBW7K2dYXRtaYaJINPbxpTww==</Firma>
+    </FirmaResponsable>
+  </FirmaDigital>
+  <Alumno>
+    <Boleta>2023630011</Boleta>
+    <AlumnoCURP>GOLM031120HDFMPGA0</AlumnoCURP>
+    <ClaveEscuela>63</ClaveEscuela>
+    <Escuela>ESCUELA SUPERIOR DE CÓMPUTO</Escuela>
+    <TipoTram>CONSTANCIA DE INSCRIPCION</TipoTram>
+    <PeriodoEscolar>25/1</PeriodoEscolar>
+    <Promedio>8.64</Promedio>
+    <Avance>45.74%</Avance>
+  </Alumno>
+</CertificadoTramiteDigital>

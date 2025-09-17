@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--Documento probatorio de escolaridad-->
+<CertificadoTramiteDigital>
+  <version>DAE_Web_v0.5</version>
+  <CodigoTramite>280563</CodigoTramite>
+  <FirmaDigital>
+    <CadenaOriginal>63|ESCUELA SUPERIOR DE CÓMPUTO||09DPN0053X|20252|CONSTANCIA DE BECAS|2023630011|GOMEZ LOPEZ MIGUEL ANGEL|GOLM031120HDFMPGA0|C|ING. EN SIS. COMPUTACIONALES|20|0|SIN ESPECIALIDAD|57.36|8.71|matutino|6CM4|R|1|8 semestres|387|11 febrero de 2025|7 julio de 2025|Ciudad de México a los 31 días de Enero de 2025</CadenaOriginal>
+    <FirmaResponsable>
+      <RFC>FEFE881028QK5</RFC>
+      <Firmante>ERICK FERNANDEZ FRANCO</Firmante>
+      <NombreAutoridad>ING. ERICK FERNANDEZ FRANCO</NombreAutoridad>
+      <Cargo>DEPARTAMENTO DE GESTIÓN ESCOLAR</Cargo>
+      <SerieCertificado>275106190557734483187066766866275062835823785015</SerieCertificado>
+      <LlavePublica>-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA275SywgH2Q+s9CUzkroe
+RF/36VcZaKJGsWoNaKE+ua1k97pL/4YEzdoWKx5F87HTx19wHFjOWmQrlABkwCZq
+oZFCM8RUPTO+fnl5dmp7/DGIR4SoSNpY2TvIouppUsp55U8rKTdQIqZrBxmOzqyi
+h0Uxgu2imxg+L7o1QGhgu7jydHPnatCrHsuFHdZnZZ3FvwTgI95FXmjAPPy/NInq
+aB6Wu9kK6MIRFSFMPUKaGLWBmmeMpa34YY4+pv40x+ysdnbnzrbud0TJ6FDzpddF
+0MY0JfAK2Yks2exXQTqQs5ATcB8KMxRy1ACtb4W3VVV6I7/6pI8y5q9AI0cUQesm
+sQIDAQAB
+-----END PUBLIC KEY-----
+</LlavePublica>
+      <Firma>uuVcCmTNti7T6xQqUdD5Vicf+7hioCLj3t5q6m64ELbkKZWxYHDXZJ/bvWPXMJy+JCVSMssInAo3QDtFXMGszqwu8QgiZavMpRByrh31Lfh/gy2lTVVjYlpQdOdrF9+oUFW7Yzin2SluJtcTaWL0Nc+upj9Hk+2MdQlGT2RptXj9MFVlgE7B9D1H897/HC+alefyWdYHjs5TRHszp0kWoDT+VyP4HoGvkRUxpt+jdkrZN0PeHP1demToCdKhryXOkq2gV33GRvr0lJXVemyPH2s1pHHaGAHqUvG0Fu+HsGP2U3u9nMCxzMphjx1fDHN6PAVkb2yc7ZkL0keOlaO8yQ==</Firma>
+    </FirmaResponsable>
+  </FirmaDigital>
+  <Alumno>
+    <Boleta>2023630011</Boleta>
+    <AlumnoCURP>GOLM031120HDFMPGA0</AlumnoCURP>
+    <ClaveEscuela>63</ClaveEscuela>
+    <Escuela>ESCUELA SUPERIOR DE CÓMPUTO</Escuela>
+    <TipoTram>CONSTANCIA DE BECAS</TipoTram>
+    <PeriodoEscolar>25/2</PeriodoEscolar>
+    <Promedio>8.71</Promedio>
+    <Avance>57.36%</Avance>
+  </Alumno>
+</CertificadoTramiteDigital>
