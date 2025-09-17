@@ -34,7 +34,7 @@ def compile_re(pat: str) -> Pattern:
 
 STATE_BY_MODULE = {
     "iniciarSesion": "AUTH",
-    "cerrarSesion": "END",
+    "cerrarSesion": "START",  # Cambiado de "END" a "START"
 }
 
 # -------------------- Contexto --------------------
@@ -46,14 +46,22 @@ class Context(dict):
 class Automata:
     def __init__(self) -> None:
         self.ctx: Context = Context()
-        # (regex, handler, next_state, origin_module)
-# (regex, handler, next_state, origin_module, allowed_states)
+        # (regex, handler, next_state, origin_module, allowed_states)
         self._routes: List[Tuple[Pattern, Callable[[Context, str], str], str, str, Optional[set]]] = []
         self._fallback: Optional[Callable[[Context, str], str]] = None
         self._load_routes_from_modules()
         self.fallback(lambda ctx, text:
-            "No entendí tu solicitud. Prueba con comandos como 'iniciar sesion', "
-            "'info academica', 'tramites', 'inscripcion', 'materias' o 'cerrar sesion'.")
+            "🤔 No pude entender tu solicitud.\n\n"
+            "Comandos disponibles:\n"
+            "• 'iniciar sesion' - Para autenticarte\n"
+            "• 'calificaciones' - Ver tus calificaciones\n" 
+            "• 'info academica' - Tu kardex completo\n"
+            "• 'materias' - Materias disponibles\n"
+            "• 'inscripcion' - Proceso de inscripción\n"
+            "• 'tramites' - Servicios escolares\n"
+            "• 'ets' - Exámenes a título de suficiencia\n\n"
+            "💬 ¿Necesitas ayuda personalizada?\n"
+            "Contacta nuestro soporte: https://web.whatsapp.com/send?phone=+5255123456789")
 
     # Descubre utils.modules.*, importa, y registra *_RE -> handle
     def _load_routes_from_modules(self) -> None:
@@ -105,17 +113,17 @@ class Automata:
         if not self._routes:
             # fallback mínimo si no se hallaron rutas
             self.fallback(lambda ctx, text:
-                "No hay rutas registradas. Asegúrate de definir *_RE y handle(ctx, text) en tus módulos de utils/modules.")
+                "⚠️ No hay rutas registradas. Asegúrate de definir *_RE y handle(ctx, text) en tus módulos de utils/modules.\n\n"
+                "Contacta soporte técnico: https://web.whatsapp.com/send?phone=+5255123456789")
 
-        # API pública
+    # API pública
     def route(self, pattern: str, handler: Callable[[Context, str], str], next_state: str = "START", origin: str = "manual") -> None:
-            self._routes.append((compile_re(pattern), handler, next_state, origin))
+        self._routes.append((compile_re(pattern), handler, next_state, origin, None))
 
     def fallback(self, handler: Callable[[Context, str], str]) -> None:
-            self._fallback = handler
+        self._fallback = handler
 
-
-    # Es el “router” de una máquina de estados con reglas por regex. 
+    # Es el "router" de una máquina de estados con reglas por regex. 
     # Recibe el texto del usuario, lo normaliza para hacer matching, 
     # recorre las rutas registradas y, al encontrar la primera que coincide,
     #  ejecuta su handler y actualiza el estado. Si nada coincide, 
@@ -136,7 +144,7 @@ class Automata:
         return self._fallback(self.ctx, text) if self._fallback else "No hay manejador..."
 
     def reset(self) -> None:
-            self.ctx = Context()
+        self.ctx = Context()
 
 # -------------------- Singleton --------------------
 _AUTOMATA_SINGLETON: Optional[Automata] = None

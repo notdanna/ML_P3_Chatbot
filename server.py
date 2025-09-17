@@ -10,7 +10,7 @@ CORS(app)  # Permitir solicitudes desde cualquier origen
 automata = get_automata()
 
 # HTML de la interfaz (puedes moverlo a un archivo separado si prefieres)
-HTML_TEMPLATE = """
+HTML_TEMPLATE = r"""
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -331,6 +331,62 @@ HTML_TEMPLATE = """
             margin-top: 5px;
         }
 
+        /* Estilos para enlaces */
+        .whatsapp-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white !important;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            margin: 8px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+            border: none;
+        }
+
+        .whatsapp-link:hover {
+            background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            color: white !important;
+            text-decoration: none;
+        }
+
+        .whatsapp-icon {
+            font-size: 16px;
+            filter: brightness(1.2);
+        }
+
+        .web-link {
+            color: #069;
+            text-decoration: underline;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .web-link:hover {
+            color: #611232;
+            text-decoration: none;
+            background-color: rgba(6, 102, 153, 0.1);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        /* Asegurar que los enlaces se vean bien en mensajes del bot */
+        .message.bot .whatsapp-link {
+            display: inline-flex;
+            margin: 8px 0;
+        }
+
+        .message.bot .web-link {
+            word-break: break-all;
+        }
+
         /* Responsive */
         @media (max-width: 1200px) {
             .main-container {
@@ -400,18 +456,18 @@ HTML_TEMPLATE = """
     <div class="main-container">
         <div class="chat-container">
             <div class="chat-header">
-                <div class="status-indicator" id="statusIndicator">🟢 Conectado</div>
-                <h1>🎓 SAES Chat</h1>
+                <div class="status-indicator" id="statusIndicator">Conectado</div>
+                <h1>SAES Chat</h1>
                 <p>Sistema Académico Estudiantil - IPN</p>
             </div>
 
             <div class="quick-actions" id="quickActions">
                 <div class="quick-action" data-action="iniciar sesion">Iniciar Sesión</div>
                 <div class="quick-action" data-action="info academica">Info Académica</div>
-                <div class="quick-action" data-action="calificaciones">Calificaciones</div>
-                <div class="quick-action" data-action="materias">Materias</div>
-                <div class="quick-action" data-action="inscripcion">Inscripción</div>
-                <div class="quick-action" data-action="tramites">Trámites</div>
+                <div class="quick-action" data-action="ver calificaciones">Calificaciones</div>
+                <div class="quick-action" data-action="ver materias">Materias</div>
+                <div class="quick-action" data-action="ver inscripcion">Inscripción</div>
+                <div class="quick-action" data-action="ver tramites">Trámites</div>
             </div>
 
             <div class="chat-messages" id="chatMessages">
@@ -463,15 +519,6 @@ HTML_TEMPLATE = """
                 </ul>
             </div>
 
-            <div class="info-section">
-                <h4>❌ Limitaciones:</h4>
-                <ul class="info-list">
-                    <li>No realiza inscripciones reales</li>
-                    <li>No modifica calificaciones</li>
-                    <li>Solo consulta información</li>
-                    <li>Requiere datos precargados en CSV</li>
-                </ul>
-            </div>
 
             <div class="info-section">
                 <h4>🔒 Seguridad:</h4>
@@ -551,6 +598,7 @@ HTML_TEMPLATE = """
                 this.showTyping();
 
                 try {
+                    // Hacer la petición al servidor
                     const response = await fetch('/api/chat', {
                         method: 'POST',
                         headers: {
@@ -565,23 +613,57 @@ HTML_TEMPLATE = """
                     
                     const data = await response.json();
                     
+                    // Delay mínimo de 2 segundos para mostrar la animación
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    
                     // Ocultar indicador y mostrar respuesta
                     this.hideTyping();
                     this.addMessage('bot', data.response);
+                    
                 } catch (error) {
+                    // Para errores, esperar solo 1 segundo
+                    await new Promise(resolve => setTimeout(resolve, 1000));
                     this.hideTyping();
                     this.addMessage('system', '❌ Error de conexión. Intenta nuevamente.');
                     console.error('Error:', error);
                 }
             }
 
+
             addMessage(type, content) {
                 const messageDiv = document.createElement('div');
-                messageDiv.className = `message ${type}`;
-                messageDiv.textContent = content;
+                messageDiv.className = 'message ' + type;
+                
+                // Procesar enlaces en el contenido
+                const processedContent = this.processLinks(content);
+                messageDiv.innerHTML = processedContent;
                 
                 this.chatMessages.appendChild(messageDiv);
                 this.scrollToBottom();
+            }
+
+            processLinks(content) {
+                // Detectar enlaces de WhatsApp y convertirlos en enlaces clickeables
+                const whatsappRegex = /(https?:\/\/web\.whatsapp\.com[^\s]*)/gi;
+                
+                let processedContent = content
+                    // Procesar enlaces de WhatsApp
+                    .replace(whatsappRegex, function(match) {
+                        return '<a href="' + match + '" target="_blank" class="whatsapp-link">' +
+                               '<span class="whatsapp-icon">📱</span> Contactar por WhatsApp' +
+                               '</a>';
+                    })
+                    // Procesar otros enlaces web
+                    .replace(/(https?:\/\/[^\s]+)/gi, function(match) {
+                        if (!match.includes('whatsapp.com')) {
+                            return '<a href="' + match + '" target="_blank" class="web-link">' + match + '</a>';
+                        }
+                        return match; // Ya fue procesado por el regex anterior
+                    })
+                    // Procesar saltos de línea
+                    .split('\n').join('<br>');
+                
+                return processedContent;
             }
 
             showTyping() {
@@ -670,10 +752,10 @@ if __name__ == '__main__':
     # Configurar puerto desde variable de entorno o usar 5000 por defecto
     port = int(os.environ.get('PORT', 5001))
     
-    print("🚀 Iniciando SAES Chat Server...")
-    print(f"📱 Interfaz disponible en: http://localhost:{port}")
-    print(f"🔌 API disponible en: http://localhost:{port}/api/chat")
-    print("👆 Presiona Ctrl+C para detener el servidor")
+    print("Iniciando SAES Chat Server...")
+    print(f"Interfaz disponible en: http://localhost:{port}")
+    print(f"API disponible en: http://localhost:{port}/api/chat")
+    print("Presiona Ctrl+C para detener el servidor")
     
     app.run(
         host='0.0.0.0',  # Permite conexiones externas
