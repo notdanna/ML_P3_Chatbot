@@ -12,4 +12,4 @@ def handle(ctx, text):
     return "Sesión cerrada. Escribe 'iniciar sesion' para entrar de nuevo."
 
 NEXT_STATE = "END"
-ALLOWED_STATES = None   # disponible siempre
+ALLOWED_STATES = {"AUTH","AUTH_OK"}

@@ -15,12 +15,6 @@ _INSCRIPCIONES_LOG = _LOGS_DIR / "inscripciones.ndjson"
 _GRUPOS_CACHE = None
 _PERIODO_ACTUAL = "2025-1"
 
-# Colores ANSI
-_ANSI_RED = "\033[31m"
-_ANSI_RESET = "\033[0m"
-def _red(s: str) -> str:
-    return f"{_ANSI_RED}{s}{_ANSI_RESET}"
-
 # ------------------ Utilidades ------------------
 
 def _load_grupos():
@@ -122,7 +116,7 @@ def _render_listado_turno(agg: dict) -> str:
         modalidad = ejemplo.get("modalidad", "")
         salon = ejemplo.get("salon", "")
         disp_min = data["disp_min"]
-        disp_txt = _red(str(disp_min)) if disp_min is not None else _red("?")
+        disp_txt = (str(disp_min)) if disp_min is not None else ("?")
         out.append(f"- {gid} | {len(rows)} materias | Horario ej.: {horario} ({modalidad}) | Salón ej.: {salon} | Cupo min: {disp_txt}")
     out.append("")
     out.append("Indica el grupo con:  grupo: 3CV2")
@@ -298,7 +292,7 @@ def handle(ctx, text):
 
         if hay_cupo:
             return (f"De acuerdo, te inscribo en {gid_req} ({turno_label}).\n"
-                    f"Cupo mínimo a nivel grupo: {_red(str(disp_min))}\n"
+                    f"Cupo mínimo a nivel grupo: {(str(disp_min))}\n"
                     f"Se registró en: {str(_INSCRIPCIONES_LOG)}\n"
                     "¿Deseas ver el detalle de materias u otro grupo?")
         else:
@@ -307,8 +301,8 @@ def handle(ctx, text):
                 [(g, d["disp_min"]) for g, d in agg.items() if d["disp_min"] > 0 and g != gid_req],
                 key=lambda x: -x[1]
             )[:3]
-            alt_txt = ", ".join([f"{g} (cupo {_red(str(dm))})" for g, dm in alternativas]) if alternativas else "No encontré alternativas con cupo en este turno."
-            return (f"Lo intenté, pero {gid_req} ya se llenó (cupo mínimo: {_red(str(disp_min))}).\n"
+            alt_txt = ", ".join([f"{g} (cupo {(str(dm))})" for g, dm in alternativas]) if alternativas else "No encontré alternativas con cupo en este turno."
+            return (f"Lo intenté, pero {gid_req} ya se llenó (cupo mínimo: {(str(disp_min))}).\n"
                     f"Sugerencias: {alt_txt}\n"
                     f"Quedó registro en: {str(_INSCRIPCIONES_LOG)}\n"
                     "Elige otro grupo con:  grupo: <ID>   o cambia de turno:  turno: M/V")
