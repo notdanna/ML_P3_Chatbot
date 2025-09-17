@@ -89,7 +89,7 @@ HTML_TEMPLATE = r"""
             flex: 1;
             padding: 20px;
             overflow-y: auto;
-            background-color: #f8f9fa;
+            background-color: #fff;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -223,7 +223,7 @@ HTML_TEMPLATE = r"""
         }
 
         .quick-action {
-            background: #f8f9fa;
+            background: #fff;
             border: 1px solid #e1e5e9;
             padding: 8px 16px;
             border-radius: 20px;
@@ -260,7 +260,7 @@ HTML_TEMPLATE = r"""
         }
 
         .info-section {
-            background: #f8f9fa;
+            background: #fff;
             padding: 15px;
             border-radius: 10px;
             border-left: 4px solid #069;
@@ -457,7 +457,7 @@ HTML_TEMPLATE = r"""
         <div class="chat-container">
             <div class="chat-header">
                 <div class="status-indicator" id="statusIndicator">Conectado</div>
-                <h1>SAES Chat</h1>
+                <h1>SAESBOT</h1>
                 <p>Sistema Académico Estudiantil - IPN</p>
             </div>
 
@@ -468,11 +468,14 @@ HTML_TEMPLATE = r"""
                 <div class="quick-action" data-action="ver materias">Materias</div>
                 <div class="quick-action" data-action="ver inscripcion">Inscripción</div>
                 <div class="quick-action" data-action="ver tramites">Trámites</div>
+                <div class="quick-action" data-action="ver ets">ETS</div>
+                <div class="quick-action" data-action="salir">Cerrar Sesión</div>
+
             </div>
 
             <div class="chat-messages" id="chatMessages">
                 <div class="message system">
-                    🤖 ¡Hola! Soy tu asistente del SAES. Para comenzar, inicia sesión con tu boleta y contraseña.
+                    ¡Hola! Soy tu asistente del SAES. Para comenzar, inicia sesión con tu boleta y contraseña.
                 </div>
             </div>
 
@@ -499,15 +502,10 @@ HTML_TEMPLATE = r"""
         </div>
 
         <div class="info-card">
-            <div class="ipn-logo">
-                <div class="logo-text">🏛️ IPN</div>
-                <div class="logo-subtext">Instituto Politécnico Nacional</div>
-            </div>
 
-            <h3>💡 Información del Sistema</h3>
 
             <div class="info-section">
-                <h4>✅ Funciones Disponibles:</h4>
+                <h4>Funciones Disponibles:</h4>
                 <ul class="info-list">
                     <li>Iniciar/Cerrar sesión</li>
                     <li>Consultar calificaciones</li>
@@ -521,7 +519,7 @@ HTML_TEMPLATE = r"""
 
 
             <div class="info-section">
-                <h4>🔒 Seguridad:</h4>
+                <h4>Seguridad:</h4>
                 <ul class="info-list">
                     <li>Requiere autenticación con boleta</li>
                     <li>Validación de contraseña</li>
@@ -531,7 +529,7 @@ HTML_TEMPLATE = r"""
             </div>
 
             <div class="info-section">
-                <h4>🚀 Comandos Básicos:</h4>
+                <h4>Comandos Básicos:</h4>
                 <ul class="info-list">
                     <li>"iniciar sesion" - Para autenticarse</li>
                     <li>"calificaciones" - Ver notas</li>
@@ -543,7 +541,7 @@ HTML_TEMPLATE = r"""
             </div>
 
             <a href="https://www.escom.ipn.mx/#" target="_blank" class="info-link">
-                🔗 Para más información consulta ESCOM
+                Para más información consulta ESCOM
             </a>
         </div>
     </div>
